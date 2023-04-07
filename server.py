@@ -1,6 +1,7 @@
 import socket
 
 def main():
+    print("Starting server...")
     host = '127.0.0.1'
     port = 4040
 
