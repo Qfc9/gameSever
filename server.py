@@ -1,31 +1,63 @@
 import socket
+import threading
+import pickle
 
+map = []
+mapXMax = 5
+mapYMax = 5
+
+# Echo Function
+def echo(c: socket.socket, map: list):
+    # Receive data from the client
+    data = c.recv(1024).decode('utf-8')
+
+    print("from connected user: " + str(data))
+
+    print("sending: " + str(map))
+
+    # Send the uppercase data back to the client
+    
+    # create code for pickling the map
+    # send the pickled map to the client
+    mapByte = pickle.dumps(map)
+
+    c.send(mapByte)
+
+    # Close the connection
+    c.close()
+
+# Main Server
 def main():
     print("Starting server...")
+
+    for i in range(mapYMax):
+        map.append([])
+        for j in range(mapXMax):
+            map[i].append(0)
+
+    # Host and Port to start the server on
     host = '127.0.0.1'
     port = 4040
 
+    # Create a socket object
     s = socket.socket()
+
+    # Bind to the host and port
     s.bind((host,port))
 
+    # Start listening for connections
     s.listen(1)
 
-    c, addr = s.accept()
-
-    print ("Connection from: " + str(addr))
     while True:
-        data = c.recv(1024).decode('utf-8')
+        # Accept a connection, is a blocking function
+        c, addr = s.accept()
 
-        if not data:
-            break
+        # Print the address of the connection
+        print("Connection from: " + str(addr))
 
-        print("from connected user: " + str(data))
-        data = str(data).upper()
-
-        print("sending: " + str(data))
-        c.send(data.encode('utf-8'))
-
-    c.close()
+        # Create a new thread to handle the connection
+        t = threading.Thread(target=echo, args=([c, map]))
+        t.start()
     
     s.close()
 
