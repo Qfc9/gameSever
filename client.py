@@ -1,13 +1,10 @@
 import socket
 import pickle
+from libs.client.map import mapRenderer
+from libs.client.configs import host, port
 
 # Main Client
 def main():
-
-    # Host and Port to connect to
-    host = '127.0.0.1'
-    port = 4040
-
     # Create a socket object
     s = socket.socket()
 
@@ -24,8 +21,7 @@ def main():
 
     print ("Received from server: ")
     
-    for line in map:
-        print(line)
+    mapRenderer(map)
 
     # Close the connection
     s.close()
