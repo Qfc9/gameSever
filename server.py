@@ -1,6 +1,7 @@
 import socket
 import threading
 import pickle
+import random
 
 map = []
 mapXMax = 5
@@ -8,6 +9,12 @@ mapYMax = 5
 
 # Echo Function
 def echo(c: socket.socket, map: list):
+
+    spawnCoor = (random.randrange(0, mapXMax), random.randrange(0, mapYMax))
+
+    map[spawnCoor[1]][spawnCoor[0]] = -1
+
+
     # Receive data from the client
     data = c.recv(1024).decode('utf-8')
 

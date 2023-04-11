@@ -8,8 +8,12 @@
 - [ ] Make combat command<br>
 - [ ] Make 1 extra command
 
+- [ ] remove players that are disconnected from the map
+- [ ] make a player class
+- [ ] make a player management class
+
 ## Client
 - [x] Needs to be able to connect to the server
 
-- [ ] Display the map and where the user is on it<br>
+- [x] Display the map and where the user is on it<br>
 - [ ] Be able to request commands be executed
