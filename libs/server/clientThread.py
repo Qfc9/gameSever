@@ -4,11 +4,11 @@ import random
 from libs.shared.configs import map, mapXMax, mapYMax
 
 # Client Thread
-def clientThread(c: socket.socket, map: list):
+def clientThread(c: socket.socket, map: list, id: int):
 
     spawnCoor = (random.randrange(0, mapXMax), random.randrange(0, mapYMax))
 
-    map[spawnCoor[1]][spawnCoor[0]] = -1
+    map[spawnCoor[1]][spawnCoor[0]] = id
 
 
     # Receive data from the client

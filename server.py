@@ -3,10 +3,12 @@ import threading
 from libs.server.clientThread import clientThread
 from libs.shared.configs import map, mapXMax, mapYMax
 from libs.server.configs import host, port
+from libs.server.playerManagement import PlayerManagement
 
 # Main Server
 def main():
     print("Starting server...")
+    pm = PlayerManagement()
 
     for i in range(mapYMax):
         map.append([])
@@ -29,8 +31,13 @@ def main():
         # Print the address of the connection
         print("Connection from: " + str(addr))
 
+        id = pm.nextId
+
         # Create a new thread to handle the connection
-        t = threading.Thread(target=clientThread, args=([c, map]))
+        t = threading.Thread(target=clientThread, args=([c, map, id]))
+        
+        pm.addConnection(c, t, id)
+
         t.start()
     
     s.close()

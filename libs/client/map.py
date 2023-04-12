@@ -8,8 +8,8 @@ def mapRenderer(map: list):
         for tile in line:
             tileDisplay = ' '
 
-            if tile == -1:
-                tileDisplay = 'X'
+            if tile < 0:
+                tileDisplay = str(tile)
 
             print(tileDisplay, end='|')
 

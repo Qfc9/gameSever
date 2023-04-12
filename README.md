@@ -10,7 +10,7 @@
 
 - [ ] remove players that are disconnected from the map
 - [ ] make a player class
-- [ ] make a player management class
+- [x] make a player management class
 
 ## Client
 - [x] Needs to be able to connect to the server
