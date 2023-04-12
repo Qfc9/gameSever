@@ -1,30 +1,44 @@
 import socket
+import threading
+from libs.server.clientThread import clientThread
+from libs.shared.configs import map, mapXMax, mapYMax
+from libs.server.configs import host, port
+from libs.server.playerManagement import PlayerManagement
 
+# Main Server
 def main():
-    host = '127.0.0.1'
-    port = 4040
+    print("Starting server...")
+    pm = PlayerManagement()
 
+    for i in range(mapYMax):
+        map.append([])
+        for j in range(mapXMax):
+            map[i].append(0)
+
+    # Create a socket object
     s = socket.socket()
+
+    # Bind to the host and port
     s.bind((host,port))
 
+    # Start listening for connections
     s.listen(1)
 
-    c, addr = s.accept()
-
-    print ("Connection from: " + str(addr))
     while True:
-        data = c.recv(1024).decode('utf-8')
+        # Accept a connection, is a blocking function
+        c, addr = s.accept()
 
-        if not data:
-            break
+        # Print the address of the connection
+        print("Connection from: " + str(addr))
 
-        print("from connected user: " + str(data))
-        data = str(data).upper()
+        id = pm.nextId
 
-        print("sending: " + str(data))
-        c.send(data.encode('utf-8'))
+        # Create a new thread to handle the connection
+        t = threading.Thread(target=clientThread, args=([c, map, id]))
+        
+        pm.addConnection(c, t, id)
 
-    c.close()
+        t.start()
     
     s.close()
 
