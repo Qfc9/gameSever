@@ -13,5 +13,5 @@ class PlayerManagement():
         return self.__nextId
 
 
-    def addConnection(self, connection: socket.socket, thread: threading.Thread, id: int):
-        self.players[str(id)] = Player.Player(id, connection, thread)
+    def addConnection(self, player: Player.Player):
+        self.players[str(id)] = player
