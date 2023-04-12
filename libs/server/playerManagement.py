@@ -1,9 +1,10 @@
 import socket
 import threading
+import libs.server.player as Player
 
 class PlayerManagement():
     def __init__(self) -> None:
-        self.connection = {}
+        self.players: dict = {}
         self.__nextId = -1
 
     @property
@@ -13,4 +14,4 @@ class PlayerManagement():
 
 
     def addConnection(self, connection: socket.socket, thread: threading.Thread, id: int):
-        self.connection[str(id)] = (connection, thread, id)
+        self.players[str(id)] = Player.Player(id, connection, thread)
