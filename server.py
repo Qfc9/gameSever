@@ -1,6 +1,5 @@
 import socket
 import threading
-from libs.server.clientThread import clientThread
 from libs.shared.configs import map, mapXMax, mapYMax
 from libs.server.configs import host, port
 from libs.server.playerManagement import PlayerManagement
