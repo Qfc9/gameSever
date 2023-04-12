@@ -8,7 +8,7 @@
 - [ ] Make combat command<br>
 - [ ] Make 1 extra command
 
-- [ ] remove players that are disconnected from the map
+- [x] remove players that are disconnected from the map
 - [x] make a player class
 - [x] make a player management class
 

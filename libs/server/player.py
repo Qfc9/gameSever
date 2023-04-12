@@ -10,15 +10,17 @@ class Player():
         self.connection = connection
         self.thread: threading.Thread = None
 
+        self.currentCoor = [0, 0]
+
     def spawn(self, map: list):
         self.thread = threading.Thread(target=self.run, args=([map]))
         self.thread.start()
 
 
     def run(self, map: list):
-        spawnCoor = (random.randrange(0, mapXMax), random.randrange(0, mapYMax))
+        self.currentCoor = [random.randrange(0, mapXMax), random.randrange(0, mapYMax)]
 
-        map[spawnCoor[1]][spawnCoor[0]] = self.id
+        map[self.currentCoor[1]][self.currentCoor[0]] = self.id
 
 
         # Receive data from the client
@@ -39,4 +41,4 @@ class Player():
         # Close the connection
         self.connection.close()
 
-        map[spawnCoor[1]][spawnCoor[0]] = 0
+        map[self.currentCoor[1]][self.currentCoor[0]] = 0
