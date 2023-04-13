@@ -1,4 +1,6 @@
 def mapRenderer(map: list):
+    """Render the map"""
+
     for line in map:
         print(" ", end="")
         print("- " * len(line))

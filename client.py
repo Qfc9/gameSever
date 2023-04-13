@@ -3,13 +3,13 @@ import pickle
 from libs.client.map import mapRenderer
 from libs.client.configs import host, port
 
-# Main Client
+
 def main():
     # Create a socket object
     s = socket.socket()
 
     # Connect to the server
-    s.connect((host,port))
+    s.connect((host, port))
 
     # Send a message to the server
     message = input("-> ")
@@ -19,12 +19,14 @@ def main():
     data = s.recv(1024)
     map = pickle.loads(data)
 
-    print ("Received from server: ")
-    
+    print("Received from server: ")
+
+    # Render the map
     mapRenderer(map)
 
     # Close the connection
     s.close()
+
 
 if __name__ == '__main__':
     main()

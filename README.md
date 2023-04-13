@@ -3,7 +3,7 @@
 ## Server
 - [x] Should be able to handle multiple clients at the same time
 
-- [ ] Keep track of players on a map<br>
+- [x] Keep track of players on a map<br>
 - [ ] Keep all ther user info persistent to a file<br>
 - [ ] Make combat command<br>
 - [ ] Make 1 extra command

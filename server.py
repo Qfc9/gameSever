@@ -5,11 +5,12 @@ from libs.server.configs import host, port
 from libs.server.playerManagement import PlayerManagement
 from libs.server.player import Player
 
-# Main Server
+
 def main():
     print("Starting server...")
     pm = PlayerManagement()
 
+    # Create the map
     for i in range(mapYMax):
         map.append([])
         for j in range(mapXMax):
@@ -19,7 +20,7 @@ def main():
     s = socket.socket()
 
     # Bind to the host and port
-    s.bind((host,port))
+    s.bind((host, port))
 
     # Start listening for connections
     s.listen(1)
@@ -31,12 +32,16 @@ def main():
         # Print the address of the connection
         print("Connection from: " + str(addr))
 
+        # Create a new player
         player = Player(pm.nextId, c)
-        player.spawn(map)    
+        # Spawn the player
+        player.spawn(map)
 
+        # Add the player to the player management
         pm.addConnection(player)
-    
+
     s.close()
+
 
 if __name__ == '__main__':
     main()
