@@ -12,7 +12,7 @@ def main():
     s.connect((host, port))
 
     # Send a message to the server
-    message = input("-> ")
+    message = input("Enter Username > ")
     s.send(message.encode('utf-8'))
 
     # Receive data from the server
