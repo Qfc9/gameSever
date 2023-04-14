@@ -33,7 +33,7 @@ def main():
         print("Connection from: " + str(addr))
 
         # Create a new player
-        player = Player(pm.nextId, c)
+        player = Player(pm.nextId, c, pm.refresh)
         # Spawn the player
         player.spawn(map)
 
