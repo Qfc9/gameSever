@@ -4,11 +4,20 @@ from libs.shared.configs import map, mapXMax, mapYMax
 from libs.server.configs import host, port
 from libs.server.playerManagement import PlayerManagement
 from libs.server.player import Player
-
+import pickle
 
 def main():
     print("Starting server...")
     pm = PlayerManagement()
+
+    try:
+        with open('save.pickle', 'rb') as f:
+            pmPackage = pickle.load(f)
+            pm.players = pmPackage["players"]
+            pm.__nextId = pmPackage["id"]
+    except Exception as e:
+        print(e)
+        print("No save file found, continuing...")
 
     # Create the map
     for i in range(mapYMax):

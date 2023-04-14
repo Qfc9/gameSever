@@ -57,6 +57,12 @@ class Player():
         """
         # Receive username from the client
         self.username = self.connection.recv(1024).decode('utf-8')
+        if not self.username.isalpha():
+            print("Username from {}:{} was invalid".format(self.connection.getpeername()[0], self.connection.getpeername()[1]))
+            self.connection.close()
+
+        self.username = self.username.lower()
+
         self.pending = False
         self.refresh()
 
@@ -84,3 +90,5 @@ class Player():
 
         # Remove the player from the map
         map[self.currentCoor[1]][self.currentCoor[0]] = 0
+
+        # TODO bug on load, some people will spawn in a new location

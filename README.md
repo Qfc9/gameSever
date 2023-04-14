@@ -4,7 +4,8 @@
 - [x] Should be able to handle multiple clients at the same time
 
 - [x] Keep track of players on a map<br>
-- [ ] Keep all ther user info persistent to a file<br>
+- [x] Keep all the user info persistent to a file<br>
+- [ ] Load all user info from the saved file<br>
 - [ ] Make combat command<br>
 - [ ] Make 1 extra command
 

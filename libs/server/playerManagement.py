@@ -57,11 +57,14 @@ class PlayerManagement():
                 # could be a memeory leak
 
         # Saving to a file process
-        playersSanitized = {}
+        pmPackage = {
+            'players': {},
+            'id': self.__nextId,
+        }
         for id, player in self.players.items():
             # Get the sanitized player info
-            playersSanitized[player.username] = player.export()
+            pmPackage['players'][player.username] = player.export()
 
         # Save the players to a file
         with open('save.pickle', 'wb') as f:
-            pickle.dump(playersSanitized, f)
+            pickle.dump(pmPackage, f)
