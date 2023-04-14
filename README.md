@@ -5,7 +5,7 @@
 
 - [x] Keep track of players on a map<br>
 - [x] Keep all the user info persistent to a file<br>
-- [ ] Load all user info from the saved file<br>
+- [x] Load all user info from the saved file<br>
 - [ ] Make combat command<br>
 - [ ] Make 1 extra command
 
