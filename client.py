@@ -24,6 +24,21 @@ def main():
     # Render the map
     mapRenderer(map)
 
+    while True:
+        # Send a message to the server
+        # TODO Print out available commands
+        message = input("Enter Command > ")
+        s.send(message.encode('utf-8'))
+
+        # Receive data from the server
+        data = s.recv(1024)
+        map = pickle.loads(data)
+
+        print("Received from server: ")
+
+        # Render the map
+        mapRenderer(map)
+
     # Close the connection
     s.close()
 
