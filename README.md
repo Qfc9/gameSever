@@ -7,7 +7,7 @@
 - [x] Keep all the user info persistent to a file<br>
 - [x] Load all user info from the saved file<br>
 - [ ] Make combat command<br>
-- [ ] Make 1 extra command
+- [x] Make 1 extra command
 
 - [x] remove players that are disconnected from the map
 - [x] make a player class
@@ -17,4 +17,4 @@
 - [x] Needs to be able to connect to the server
 
 - [x] Display the map and where the user is on it<br>
-- [ ] Be able to request commands be executed
+- [x] Be able to request commands be executed
