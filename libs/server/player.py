@@ -4,7 +4,8 @@ import random
 import pickle
 import time
 from libs.shared.configs import map, mapXMax, mapYMax
-
+from libs.shared.playerConfigs import UP, DOWN, LEFT, RIGHT
+import json
 
 class Player():
     """The player class is used to manage the player's connection and thread"""
@@ -80,10 +81,19 @@ class Player():
 
        # create code for pickling the map
         # send the pickled map to the client
-        mapByte = pickle.dumps(map)
-        self.connection.send(mapByte) 
+        self.sendMap(map) 
 
-        time.sleep(10)
+        while True:
+            data = self.connection.recv(1024).decode('utf-8')
+
+            data: dict = json.loads(data)
+
+            if data.get("exit"):
+                break
+
+            if data.get("move") is not None:
+                self.move(data["move"])
+                self.sendMap(map) 
 
         # Close the connection
         self.connection.close()
@@ -92,3 +102,30 @@ class Player():
         map[self.currentCoor[1]][self.currentCoor[0]] = 0
 
         # TODO bug on load, some people will spawn in a new location
+
+    def sendMap(self, map: list):
+        """
+            Sends the map to the client
+        """
+        self.connection.send(pickle.dumps(map))
+
+    def move(self, direction: int):
+        """
+            Moves the player
+        """
+        # Remove the player from the map
+        map[self.currentCoor[1]][self.currentCoor[0]] = 0
+
+        # Move the player
+        # TODO: add collision detection
+        if direction == UP:
+            self.currentCoor[1] -= 1
+        elif direction == DOWN:
+            self.currentCoor[1] += 1
+        elif direction == LEFT:
+            self.currentCoor[0] -= 1
+        elif direction == RIGHT:
+            self.currentCoor[0] += 1
+
+        # Put the player on the map, the player id is the value
+        map[self.currentCoor[1]][self.currentCoor[0]] = self.id
